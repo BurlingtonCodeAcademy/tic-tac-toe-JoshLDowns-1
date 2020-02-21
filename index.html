@@ -1,38 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
   <title>Tic Tac Toe</title>
-  <link type="text/css" rel="stylesheet" href="style.css">
+  <link type='text/css' rel='stylesheet' href='style.css'>
+  <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap" rel="stylesheet">
+  <script src='./minimax.js'></script>
 </head>
 
 <body>
-  <h2>Tic Tac Toe</h2>
-  <div class="board">
-    <div id="row-1">
-      <div id="cell-0"></div>
-      <div id="cell-1"></div>
-      <div id="cell-2"></div>
-    </div>
-    <div id="row-2">
-      <div id="cell-3"></div>
-      <div id="cell-4"></div>
-      <div id="cell-5"></div>
-    </div>
-    <div id="row-3">
-      <div id="cell-6"></div>
-      <div id="cell-7"></div>
-      <div id="cell-8"></div>
-    </div>
+  <div id='title'>
+    <h2 id='title-text'>Tic Tac Toe</h2>
   </div>
 
-  <div class="status">
-    <button id="start" type="button">Start Game</button>
+  <div id="board">
+      <div id='0' class='cell'></div>
+      <div id='1' class='cell'></div>
+      <div id='2' class='cell'></div>
+      <div id='3' class='cell'></div>
+      <div id='4' class='cell'></div>
+      <div id='5' class='cell'></div>
+      <div id='6' class='cell'></div>
+      <div id='7' class='cell'></div>
+      <div id='8' class='cell'></div>
   </div>
-  <script src="main.js"></script>
+
+  <div id='status'>
+    <button id='one-player' class='button' type='button'><strong>One Player</strong></button>
+    <div id='clock'>
+      <div><p>||</p></div>
+      <span id='minutes'>00</span>
+      <div><p>::</p></div>
+      <span id='seconds'>00</span>
+      <div><p>||</p></div>
+    </div>
+    <button id='two-player' class='button' type='button'><strong>Two Player</strong></button>
+  </div>
+
+  <script src='./main.js'></script>
 </body>
 
 </html>

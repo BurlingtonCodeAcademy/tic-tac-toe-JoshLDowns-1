@@ -1,56 +1,163 @@
+@import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap');
+
+html {
+  background: url(../images/texture.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  z-index: 0;
+}
+
 body {
-  background-color: rgb(255, 255, 255);
-  width: 1000px;
-  margin: 10px auto;
+  width: 100vw;
+  height: 95vh;
+  min-height: 400px;
   text-align: center;
-  padding: 10px;
-  user-select: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  justify-self: center;
+  align-self: center;
+  padding: auto 5vw auto 5vw;
+}
+
+#title {
+  margin: 1vh auto 1vh auto;
+  width: 100vw;
+  min-width: 200px;
+  font-family: 'Fredericka the Great';
+  font-size: 5vh;
 }
 
 h2 {
-  font-size: 30px;
+  margin: 1vh auto 1vh auto;
+}
+
+#board {
+  margin: 1vh auto 0vh auto;
+  display: grid;
+  height: 60vh;
+  width: 60vh;
+  min-width: 200px;
+  min-height: 200px;
+  grid-template-columns: 33.33% 33.33% 33.33%;
+  grid-template-rows: 33.33% 33.33% 33.33%;
+  grid-template-areas: 
+  '0 1 2'
+  '3 4 5'
+  '6 7 8';
+  border: 2vh solid darkgray;
+  background-color: lightgray;
+  border-radius: 1vh;
+}
+
+#status {
+  margin: 0vh auto 1vh auto;
+  display: flex;
+  align-self: center;
+  align-content: center;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 60vh;
+  min-width: 200px;
+  height: 6vh;
+  border: 1vh solid darkgray;
+  background-color: lightgray;
+  border-radius: 1vh;
+}
+
+p {
+  margin: 0px;
+}
+
+span {
+  width: 5vh;
+}
+
+#clock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   text-align: center;
-  height: 75px;
+  font-family: 'Fredericka the Great';
+  font-size: 4.25vh;
+  width: 25vh;
 }
 
-span{
-  font-size: 75px;
-  margin-top: 20px;
+.button {
+  margin-top: .75vh;
+  height: 4.5vh;
+  border: .5vh solid black;
+  border-radius: 1vh;
+  font-family: 'Fredericka the Great';
+  font-size: 2.5vh;
 }
 
-div[id^="row-"] div {
-  width: 200px;
-  height: 200px;
-  border: 1px solid red;
-  float: left;
-
+.button:hover {
+  border: .5vh solid darkgray;
+  background-color: lightgray;
+  box-shadow: 0px 1px 0px 1px;
 }
 
-div[id^="row-"] div:last-child {
-  border-right: none;
+.button:active {
+  box-shadow: 0px;
+  background-color: darkgray;
 }
 
-div[id^="row-"] div:first-child {
-  border-left: none;
+.cell {
+  border: 1.5vh solid black;
+  border-radius: 5%;
+  width: 75%;
+  height: 75%;
+  min-width: 65px;
+  justify-self: center;
+  align-self: center;
+  background-color: #f0f0f0;
+  font-family: 'Fredericka the Great';
+  font-size: 12vh;
+  text-align: center;
+  text-justify: center;
 }
 
-div[id="row-1"] div{
-  border-top: none;
+#0 {
+  grid-area: '0';
 }
 
-div[id="row-3"] div{
-    border-bottom: none;
+#1 {
+  grid-area: '1';
 }
 
-div[id^="row-"] {
-  clear: float;
-  width: 608px;
-  box-sizing: border-box;
-  overflow: hidden;
+#2 {
+  grid-area: '2';
 }
 
-div.board {
-  width: 608px;
-  overflow: hidden;
-  margin: 0 auto;
+#3 {
+  grid-area: '3';
 }
+
+#4 {
+  grid-area: '4';
+}
+
+#5 {
+  grid-area: '5';
+}
+
+#6 {
+  grid-area: '6';
+}
+
+#7 {
+  grid-area: '7';
+}
+
+#8 {
+  grid-area: '8';
+}
+
