@@ -54,7 +54,6 @@ start.addEventListener('click', () => {
     minutes.textContent = '00';
     gameTimer = setInterval(gameClock, 1000);
     turnCount = 0;
-    console.log(playerOneName.value);
     if (onePlayer === true && playerOneName !== 'X') {
         playerXName = playerOneName.value;
     }
@@ -111,7 +110,6 @@ start.addEventListener('click', () => {
 
 function clicked() {
     turnCount += 1;
-    console.log(turnCount);
     event.target.textContent = player.toUpperCase();
     board[event.target.id] = player;
     state = buildBoardState(board);
