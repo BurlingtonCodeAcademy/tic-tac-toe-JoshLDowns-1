@@ -13,6 +13,27 @@ html {
   z-index: 0;
 }
 
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+  
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+  
+    100% {
+      opacity: 0;
+    }
+  }
+
+
 body {
   width: 100vw;
   height: 95vh;
@@ -33,15 +54,86 @@ body {
   min-width: 200px;
   font-family: 'Fredericka the Great';
   font-size: 5vh;
+  
 }
 
 h2 {
   margin: 1vh auto 1vh auto;
 }
 
+#menu {
+  margin: 1vh auto 1vh auto;
+  width: 100vw;
+  min-width: 200px;
+  opacity: 100%;
+  display: '';
+  position: absolute;
+  align-self: center;
+  justify-content: center;
+  align-content: center;
+  margin: 15vh auto auto auto;
+  font-family: 'Fredericka the Great';
+  font-weight: bold;
+  font-size: 3vh;
+  
+}
+
+.fade {
+  -webkit-animation-name: fadeIn;
+  -webkit-animation-duration:1s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-name: fadeIn;
+  animation-duration:1s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+
+.fadeOut {
+  -webkit-animation-name: fadeOut;
+  -webkit-animation-duration:1s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease;
+  -webkit-animation-fill-mode: backwards;
+  animation-name: fadeOut;
+  animation-duration:1s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+  animation-fill-mode: backwards;
+}
+
+#one-player-name-input {
+  margin: 1vh auto 1vh auto;
+  width: 100vw;
+  min-width: 200px;
+  opacity: 0%;
+  flex-direction: column;
+  display: none;
+  position: absolute;
+  align-self: center;
+  margin: 10vh auto auto auto;
+  
+}
+
+#two-player-name-input {
+  margin: 1vh auto 1vh auto;
+  width: 100vw;
+  min-width: 200px;
+  opacity: 0%;
+  flex-direction: column;
+  display: none;
+  position: absolute;
+  align-self: center;
+  margin: 10vh auto auto auto;
+  
+}
+
 #board {
+  opacity: 0%;
   margin: 1vh auto 0vh auto;
-  display: grid;
+  display: none;
   height: 60vh;
   width: 60vh;
   min-width: 200px;
@@ -58,8 +150,9 @@ h2 {
 }
 
 #status {
+  opacity: 0%;
   margin: 0vh auto 1vh auto;
-  display: flex;
+  display: none;
   align-self: center;
   align-content: center;
   flex-direction: row;
@@ -70,6 +163,7 @@ h2 {
   border: 1vh solid darkgray;
   background-color: lightgray;
   border-radius: 1vh;
+
 }
 
 p {
@@ -90,7 +184,35 @@ span {
   width: 25vh;
 }
 
+#start {
+  margin-top:40vh;
+}
+
+#start {
+  height: 8vh;
+  font-size: 5vh;
+}
+
+#playAgain {
+  display: none;
+  height: 8vh;
+  font-size: 5vh;
+  width: 10vh;
+}
+
 .button {
+  margin-top: .75vh;
+  height: 4.5vh;
+  border: .5vh solid black;
+  border-radius: 1vh;
+  font-family: 'Fredericka the Great';
+  font-size: 2.5vh;
+}
+
+.input {
+  width: 30vh;
+  align-self: center;
+  text-align: center;
   margin-top: .75vh;
   height: 4.5vh;
   border: .5vh solid black;
@@ -123,6 +245,15 @@ span {
   font-size: 12vh;
   text-align: center;
   text-justify: center;
+}
+
+.playerName {
+  margin-top: 1vh;
+  text-align: center;
+  font-family: 'Fredericka the Great';
+  font-size: 3vh;
+  font-weight: bold;
+  width: 25vh;
 }
 
 #0 {

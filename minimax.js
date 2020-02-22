@@ -1,3 +1,6 @@
+let bestValue;
+let newScore; 
+
 function detScore(player) {
     for (let win of winningArrays) {
         let winCount = 0;
@@ -44,27 +47,30 @@ function newStates(boardState, turn) {
     return newStates;
 }
 
+
 function minMax(state, turn, depth) {
     if (state.score !== 0) {
-        return state.score;
+        if (state.score === 10) {
+            return 10 - depth;
+        } else return -10 + depth;
     } else {
         let nextStates = newStates(state, turn === 'x' ? 'o' : 'x');
         if (nextStates.length === 0) {
-            return state.score;
+            return 0;
         }
-        let currentScores = [];
-        nextStates.forEach((a) => { currentScores.push(a.score) });
-        if (turn === 'x' && currentScores.includes(10)) {
-            return 10 - depth;
-        } else if (turn === 'o' && currentScores.includes(-10)) {
-            return -10 + depth;
-        } else if (turn === 'x' && currentScores.includes(-10)) {
-            return -10 - depth;
-        } else if (turn === 'o' && currentScores.includes(10)) {
-            return 10 + depth;
-        } else {
+        if (turn === 'x') {
+            bestValue = -Infinity;
             for (let nextState of nextStates) {
-                return minMax(nextState, turn === 'x' ? 'o' : 'x', depth+1)
+                newScore = minMax(nextState, 'o', depth+1);
+                bestValue = Math.max(bestValue, newScore);
+                return bestValue;
+            }
+        } else if (turn === 'o') {
+            bestValue = Infinity;
+            for (let nextState of nextStates) {
+                newScore = minMax(nextState, 'x', depth+1);
+                bestValue = Math.min(bestValue, newScore);
+                return bestValue;
             }
         }
     }
@@ -73,33 +79,19 @@ function minMax(state, turn, depth) {
 function makeMove(boardState, player) {
     let scores = {};
     let openMoves = boardState.board;
-    openMoves.forEach((a) => scores[a] = 0);
     let nextMoves = newStates(boardState, player);
     for (let i = 0; i < openMoves.length; i++) {
-        scores[openMoves[i]] = minMax(nextMoves[i], player, 0)
+        scores[openMoves[i]] = minMax(nextMoves[i], player, 0);
+        if (player === 'x') {
+            bestValue = -1000;
+            scores[openMoves[i]] = Math.max(scores[openMoves[i]], bestValue);
+        } else {
+            bestValue = 1000;
+            scores[openMoves[i]] = Math.min(scores[openMoves[i]], bestValue);
+        }
+        console.log(scores)
     }
-    //nextMoves.forEach((state)=>scores.push(minMax(state,turn,0)));
     let moves = Object.keys(scores);
     let values = Object.values(scores);
-    let positiveScores = [];
-    let negativeScores = [];
-    values.forEach((value)=>{value<=0?negativeScores.push(value):positiveScores.push(value)});
-    console.log(scores)
-    if (player === 'x') {
-        if (moves.includes('4')) {
-            return 4;
-        } else if (negativeScores.length>positiveScores.length && !Math.max(...negativeScores)>=10) {
-            return moves[values.indexOf(Math.min(...values))]
-        } else {
-            return moves[values.indexOf(Math.max(...values))]
-        }
-    } else {
-        if (moves.includes('4')) {
-            return 4;
-        } else if (negativeScores.length<positiveScores.length && (negativeScores.length === 0 || !Math.min(...negativeScores)<=-10)) {
-            return moves[values.indexOf(Math.max(...values))]
-        } else {
-            return moves[values.indexOf(Math.min(...values))]
-        }
-    }
+    return player === 'x' ? moves[values.indexOf(Math.max(...values))] : moves[values.indexOf(Math.min(...values))];
 }

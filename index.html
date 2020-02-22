@@ -16,28 +16,65 @@
     <h2 id='title-text'>Tic Tac Toe</h2>
   </div>
 
+  <div id='playAgain'>
+    <button id='again' class='button' type='button'><strong>Play Again?</strong></button>
+  </div>
+
+  <div id='menu'>
+    <div id='buttons'>
+      <button id='one-player' class='button' type='button'><strong>One Player</strong></button>
+      <button id='two-player' class='button' type='button'><strong>Two Player</strong></button>
+    </div>
+    <div id='one-player-name-input'>
+      <label for="player-one-name">Enter your name: </label>
+    </br>
+      <input name="player-one-name" id="onePName" class='input' type="text" placeholder="change me..." value='X'></input>
+    </div>
+    <div id='two-player-name-input'>
+      <div id='two-player-one'>
+        <label for="player-one-name">Enter Player X name: </label>
+      </br>
+        <input name="player-one-name-two" id="onePNameTwo" class='input' type="text" placeholder="change me..." value='X'></input>
+      </div>
+      <div id='two-player-two'>
+        <label for="player-two-name">Enter Player O name: </label>
+      </br>
+        <input name="player-two-name" id="twoPName" class='input' type="text" placeholder="change me..." value='O'></input>
+      </div>
+    </div>
+  </br>
+  </br>
+    <button id='start' class='button' type='button' disabled='true' ><strong>PLAY !</strong></button>
+  </div>
+
   <div id="board">
-      <div id='0' class='cell'></div>
-      <div id='1' class='cell'></div>
-      <div id='2' class='cell'></div>
-      <div id='3' class='cell'></div>
-      <div id='4' class='cell'></div>
-      <div id='5' class='cell'></div>
-      <div id='6' class='cell'></div>
-      <div id='7' class='cell'></div>
-      <div id='8' class='cell'></div>
+    <div id='0' class='cell'></div>
+    <div id='1' class='cell'></div>
+    <div id='2' class='cell'></div>
+    <div id='3' class='cell'></div>
+    <div id='4' class='cell'></div>
+    <div id='5' class='cell'></div>
+    <div id='6' class='cell'></div>
+    <div id='7' class='cell'></div>
+    <div id='8' class='cell'></div>
   </div>
 
   <div id='status'>
-    <button id='one-player' class='button' type='button'><strong>One Player</strong></button>
+    <p id='playerX' class='playerName'>Player One</p>
     <div id='clock'>
-      <div><p>||</p></div>
+      <div>
+        <p>||</p>
+      </div>
       <span id='minutes'>00</span>
-      <div><p>::</p></div>
+      <div>
+        <p>::</p>
+      </div>
       <span id='seconds'>00</span>
-      <div><p>||</p></div>
+      <div>
+        <p>||</p>
+      </div>
     </div>
-    <button id='two-player' class='button' type='button'><strong>Two Player</strong></button>
+    <p id='playerO' class='playerName'>Player Two</p>
   </div>
 
   <script src='./main.js'></script>
