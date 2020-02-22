@@ -29,6 +29,7 @@ let playerTwoName = document.getElementById('twoPName');
 let start = document.getElementById('start');
 let playerXDisplay = document.getElementById('playerX');
 let playerODisplay = document.getElementById('playerO');
+let playAgain = document.getElementById('playAgain');
 
 
 onePlayerStart.addEventListener('click', () => {
@@ -65,48 +66,43 @@ start.addEventListener('click', () => {
     }
     if (onePlayer === true) {
         onePlayerNameInput.className = 'fadeOut';
-        onePlayerNameInput.style.display = 'none';
-        menu.className = 'fadeOut';
-        menu.style.display = 'none'
+        onePlayerNameInput.style.zIndex = '-10';
         if (playerXName !== 'X') {
             playerXDisplay.textContent = playerXName;
         }
         playerODisplay.textContent = 'Computer';
-        gameBoard.style.display = 'grid'
-        gameBoard.className = 'fade'
-        status.style.display = 'flex'
-        status.className = 'fade'
-        player = 'x'
-        textUpdate.textContent = `It's ${playerXName}'s turn!`
-        cells.forEach((cell) => {
-            cell.addEventListener('click', clicked)
-            cell.textContent = '';
-            cell.style.backgroundColor = '#f0f0f0';
-        })
+        startGame();
     } else {
         twoPlayerNameInput.className = 'fadeOut';
-        twoPlayerNameInput.style.display = 'none';
-        menu.className = 'fadeOut';
-        menu.style.display = 'none'
+        twoPlayerNameInput.style.zIndex = '-10';
         if (playerXName !== 'X') {
             playerXDisplay.textContent = playerXName;
         }
         if (playerOName !== 'O') {
             playerODisplay.textContent = playerOName;
         }
-        gameBoard.style.display = 'grid'
-        gameBoard.className = 'fade'
-        status.style.display = 'flex'
-        status.className = 'fade'
-        player = 'x'
-        textUpdate.textContent = `It's ${playerXName}'s turn!`
-        cells.forEach((cell) => {
-            cell.addEventListener('click', clicked)
-            cell.textContent = '';
-            cell.style.backgroundColor = '#f0f0f0';
-        })
+        startGame();
     }
-})
+});
+
+playAgain.addEventListener('click', restart)
+
+function startGame() {
+    menu.className = 'fadeOut';
+    menu.style.zIndex = '-10';
+    gameBoard.style.display = 'grid';
+    gameBoard.className = 'fade'
+    gameBoard.style.zIndex = '1';
+    status.style.display = 'flex';
+    status.className = 'fade';
+    start.disabled = true;
+    player = 'x';
+    textUpdate.textContent = `It's ${playerXName}'s turn!`;
+    cells.forEach((cell) => {
+        cell.addEventListener('click', clicked);
+        cell.style.backgroundColor = '#f0f0f0';
+    })
+}
 
 function clicked() {
     turnCount += 1;
@@ -209,5 +205,35 @@ function reset() {
     onePlayerStart.disabled = false;
     twoPlayerStart.disabled = false;
     board = { 0: false, 1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false };
+    setTimeout(() => {
+        gameBoard.className = 'fadeAway';
+        gameBoard.style.zIndex = '-10';
+        cells.forEach((cell) => {
+            cell.textContent = '';
+            cell.removeEventListener('click', clicked);
+        });
+        status.className = 'fadeOut';
+        status.zIndex = '-10';
+    }, 1000);
+    setTimeout(() => {
+        playAgain.className = 'fade';
+        playAgain.style.zIndex = '1';
+    }, 3000);
     return stopClock();
+}
+
+function restart() {
+    playAgain.className = 'fadeOut';
+    playAgain.style.zIndex = '-10';
+    onePlayerNameInput.style.opacity = '0';
+    twoPlayerNameInput.style.opacity = '0';
+    playerXName = 'X';
+    playerOName = 'O';
+    playerXDisplay = 'Player One';
+    playerODisplay = 'Player Two';
+    setTimeout(()=>{
+        menu.className = 'fade';
+        menu.style.zIndex = '1';
+        textUpdate.textContent ='Tic Tac Toe'
+    }, 1000);
 }

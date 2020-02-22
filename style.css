@@ -33,11 +33,29 @@ html {
     }
   }
 
+  @keyframes fadeAway {
+    0% {
+      opacity: 1;
+    }
+
+    30% {
+      opacity: 1;
+      width: 80vh;
+    }
+
+    100% {
+      height: 50px;
+      width: 50vh;
+      opacity: 0;
+    }
+  }
+
 
 body {
   width: 100vw;
   height: 95vh;
-  min-height: 400px;
+  min-height: 200px;
+  min-width: 200px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -96,12 +114,25 @@ h2 {
   -webkit-animation-duration:1s;
   -webkit-animation-iteration-count: 1;
   -webkit-animation-timing-function: ease;
-  -webkit-animation-fill-mode: backwards;
+  -webkit-animation-fill-mode: forwards;
   animation-name: fadeOut;
   animation-duration:1s;
   animation-iteration-count: 1;
   animation-timing-function: ease;
-  animation-fill-mode: backwards;
+  animation-fill-mode: forwards;
+}
+
+.fadeAway {
+  -webkit-animation-name: fadeAway;
+  -webkit-animation-duration:2s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-name: fadeAway;
+  animation-duration:3s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
 }
 
 #one-player-name-input {
@@ -136,7 +167,7 @@ h2 {
   display: none;
   height: 60vh;
   width: 60vh;
-  min-width: 200px;
+  min-width: 300px;
   min-height: 200px;
   grid-template-columns: 33.33% 33.33% 33.33%;
   grid-template-rows: 33.33% 33.33% 33.33%;
@@ -194,10 +225,17 @@ span {
 }
 
 #playAgain {
-  display: none;
-  height: 8vh;
+  position: absolute;
+  margin-top: 25vh;
+  margin-left: auto;
+  margin-right: auto;
+  justify-self: center;
+  align-self: center;
+  opacity: 0;
+  z-index: -10;
+  height: 16vh;
   font-size: 5vh;
-  width: 10vh;
+  width: 25vh;
 }
 
 .button {
