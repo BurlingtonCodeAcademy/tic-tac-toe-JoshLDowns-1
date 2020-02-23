@@ -1,3 +1,5 @@
+//----- variable declarations and html element targeting -----//
+
 let winningArrays = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 let player = 'x';
 let playerXName = 'X';
@@ -31,7 +33,9 @@ let playerXDisplay = document.getElementById('playerX');
 let playerODisplay = document.getElementById('playerO');
 let playAgain = document.getElementById('playAgain');
 
+//----------- Event Listeners ----------//
 
+//event listner for one player button
 onePlayerStart.addEventListener('click', () => {
     onePlayerStart.disabled = true;
     twoPlayerStart.disabled = true;
@@ -40,7 +44,7 @@ onePlayerStart.addEventListener('click', () => {
     onePlayerNameInput.className = 'fade';
     start.disabled = false;
 })
-
+//event listener for two player button
 twoPlayerStart.addEventListener('click', () => {
     onePlayerStart.disabled = true;
     twoPlayerStart.disabled = true;
@@ -49,7 +53,7 @@ twoPlayerStart.addEventListener('click', () => {
     twoPlayerNameInput.className = 'fade';
     start.disabled = false;
 })
-
+//event listener for start button
 start.addEventListener('click', () => {
     seconds.textContent = '00';
     minutes.textContent = '00';
@@ -84,9 +88,12 @@ start.addEventListener('click', () => {
         startGame();
     }
 });
-
+//event listener for play again button
 playAgain.addEventListener('click', restart)
 
+//-------- basic game functions ---------//
+
+//starts the game after 'start' is clicked
 function startGame() {
     menu.className = 'fadeOut';
     menu.style.zIndex = '-10';
@@ -103,7 +110,7 @@ function startGame() {
         cell.style.backgroundColor = '#f0f0f0';
     })
 }
-
+//on click function for cell divs.  All basic game logic is included here.
 function clicked() {
     turnCount += 1;
     event.target.textContent = player.toUpperCase();
@@ -140,7 +147,7 @@ function clicked() {
         }
     }
 }
-
+//determines if there is a win on the board
 function checkWin(boardState, currentPlayer) {
     let player = currentPlayer === 'x' ? 'playerX' : 'playerO';
     for (let win of winningArrays) {
@@ -159,7 +166,7 @@ function checkWin(boardState, currentPlayer) {
     }
     return false;
 }
-
+//pads numbers with a zero for the clock if they are single digit
 function pad(number) {
     if ((number + '').length === 2) {
         return number + '';
@@ -167,7 +174,7 @@ function pad(number) {
         return '0' + number;
     }
 }
-
+//builds the display for the clock
 function gameClock() {
     let second = parseInt(seconds.textContent);
     let minute = parseInt(minutes.textContent);
@@ -180,11 +187,11 @@ function gameClock() {
         seconds.textContent = pad(second);
     }
 }
-
+//turns off the clock
 function stopClock() {
     clearInterval(gameTimer);
 }
-
+//builds the current board state with each players moves to be passed into the minimax function
 function buildBoardState(currentBoard) {
     let boardObj = { board: [], playerX: [], playerO: [] };
     let count = 0;
@@ -200,7 +207,7 @@ function buildBoardState(currentBoard) {
     }
     return boardObj;
 }
-
+//resets the board so it's ready for a new game
 function reset() {
     onePlayerStart.disabled = false;
     twoPlayerStart.disabled = false;
@@ -221,7 +228,7 @@ function reset() {
     }, 3000);
     return stopClock();
 }
-
+//restarts the game when play again is clicked
 function restart() {
     playAgain.className = 'fadeOut';
     playAgain.style.zIndex = '-10';
@@ -229,8 +236,10 @@ function restart() {
     twoPlayerNameInput.style.opacity = '0';
     playerXName = 'X';
     playerOName = 'O';
-    playerXDisplay = 'Player One';
-    playerODisplay = 'Player Two';
+    playerXDisplay.textContent = 'Player One';
+    playerODisplay.textContent = 'Player Two';
+    onePlayer = false;
+    twoPlayer = false;
     setTimeout(()=>{
         menu.className = 'fade';
         menu.style.zIndex = '1';
