@@ -2,13 +2,13 @@ let winningArrays = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 
 let player = 'x';
 let playerXName = 'X';
 let playerOName = 'O';
-
-let minutes = document.getElementById('minutes');
-let seconds = document.getElementById('seconds');
+let onePlayer = false;
 
 let boards = Array.from(document.getElementsByClassName('board'));
 let cells = Array.from(document.getElementsByClassName('cell'));
-let textUpdate = document.getElementById('text-update');
+let textUpdate = document.getElementById('status-update');
+let onePlayerStart = document.getElementById('one-player');
+let twoPlayerStart = document.getElementById('two-player');
 
 let boardReference = {};
 let fullBoard = {
@@ -29,14 +29,18 @@ for (let i = 0; i < 9; i++) {
     boardReference[i] = cells.splice(0, 9);
 }
 
-//start game functions to be added to start feature
-boardReference[4].forEach((cell) => cell.addEventListener('click', clicked));
-boards[4].style.opacity = '1';
-boards[4].style.backgroundColor = '#f0f0f0';
+onePlayerStart.addEventListener('click', start);
+twoPlayerStart.addEventListener('click', start)
 
-seconds.textContent = '00';
-minutes.textContent = '00';
-gameTimer = setInterval(gameClock, 1000);
+function start() {
+    boardReference[4].forEach((cell) => cell.addEventListener('click', clicked));
+    boards[4].style.opacity = '1';
+    boards[4].style.backgroundColor = '#f0f0f0';
+    onePlayerStart.disabled = true;
+    twoPlayerStart.disabled = true;
+    textUpdate.textContent = `It's ${player === 'x' ? playerXName : playerOName}'s turn!`
+    event.target.id === 'one-player'?onePlayer = true:onePlayer = false;
+}
 
 //all basic game logic on click event
 function clicked() {
@@ -50,10 +54,14 @@ function clicked() {
         }
     });
     //prepares current board to be left, adds text, and declare variables for various logic checks
-    cells.forEach((cell)=>cell.removeEventListener('click', clicked))
+    cells.forEach((cell) => cell.removeEventListener('click', clicked))
     let currentBoard = event.target.id[0];
     let nextBoard = event.target.id[2];
     fullBoard[currentBoard][nextBoard] = player;
+    let values = Object.values(fullBoard[currentBoard]);
+    if (!values.includes(false)) {
+        fullBoard[currentBoard].finished = true;
+    }
     event.target.textContent = player.toUpperCase();
     event.target.removeEventListener('click', clicked);
     //checks if there is a win in local board
@@ -73,8 +81,7 @@ function clicked() {
         //checks if player won on global board
         let fullWin = checkWin(buildBoardState(regBoard), player, undefined);
         if (fullWin === true) {
-            stopClock();
-            return textUpdate.textContent = `${player === 'x' ? playerXName : playerOName} WINS!!!`
+            return textUpdate.textContent = `${player === 'x' ? playerXName : playerOName} WINS!!!`;
         } else {
             //checks if board being moved to is full
             if ('finished' in fullBoard[nextBoard]) {
@@ -98,12 +105,13 @@ function clicked() {
                 });
                 boards[nextBoard].style.opacity = '1';
                 boards[nextBoard].style.backgroundColor = '#f0f0f0';
-    
+
                 player = player === 'x' ? 'o' : 'x';
                 return textUpdate.textContent = `It's ${player === 'x' ? playerXName : playerOName}'s turn!`
             }
         }
     } else {
+
         //checks if board being moved to is full
         if ('finished' in fullBoard[nextBoard]) {
             boards.forEach((board) => {
@@ -123,6 +131,10 @@ function clicked() {
             boardReference[currentBoard].forEach((cell) => cell.removeEventListener('click', clicked));
             boards[currentBoard].style.opacity = '.25';
             boards[currentBoard].style.backgroundColor = 'lightGray';
+            if ('finished' in fullBoard[currentBoard]) {
+                boards[currentBoard].style.opacity = '1';
+                boards[currentBoard].style.backgroundColor = '#f0f0f0';
+            }
             boardReference[nextBoard].forEach((cell) => {
                 if (fullBoard[nextBoard][boardReference[nextBoard].indexOf(cell)] === false)
                     cell.addEventListener('click', clicked)
@@ -178,30 +190,4 @@ function checkWin(boardState, currentPlayer, boardNum) {
         }
     }
     return false;
-}
-
-//pads numbers with a zero for the clock if they are single digit
-function pad(number) {
-    if ((number + '').length === 2) {
-        return number + '';
-    } else {
-        return '0' + number;
-    }
-}
-//builds the display for the clock
-function gameClock() {
-    let second = parseInt(seconds.textContent);
-    let minute = parseInt(minutes.textContent);
-    second += 1;
-    if (second === 60) {
-        second = 0;
-        seconds.textContent = '00';
-        minutes.textContent = pad(minute + 1);
-    } else {
-        seconds.textContent = pad(second);
-    }
-}
-//turns off the clock
-function stopClock() {
-    clearInterval(gameTimer);
 }
