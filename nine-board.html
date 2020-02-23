@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Tic Tac Toe</title>
+    <link type='text/css' rel='stylesheet' href='nine-style.css'>
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap" rel="stylesheet">
+    <script src='./minimax.js'></script>
+</head>
+
+<body>
+    <div id='title'>
+        <h2 class='title-text'>EXTREME</h2>
+        <h2 id ='text-update' class='title-text'>Tic Tac Toe</h2>
+    </div>
+
+    <div id='fullBoard'>
+        <div id='board-0' class='board'>
+            <div id='0-0' class='cell'></div>
+            <div id='0-1' class='cell'></div>
+            <div id='0-2' class='cell'></div>
+            <div id='0-3' class='cell'></div>
+            <div id='0-4' class='cell'></div>
+            <div id='0-5' class='cell'></div>
+            <div id='0-6' class='cell'></div>
+            <div id='0-7' class='cell'></div>
+            <div id='0-8' class='cell'></div>
+        </div>
+        <div id='board-1' class='board'>
+            <div id='1-0' class='cell'></div>
+            <div id='1-1' class='cell'></div>
+            <div id='1-2' class='cell'></div>
+            <div id='1-3' class='cell'></div>
+            <div id='1-4' class='cell'></div>
+            <div id='1-5' class='cell'></div>
+            <div id='1-6' class='cell'></div>
+            <div id='1-7' class='cell'></div>
+            <div id='1-8' class='cell'></div>
+        </div>
+        <div id='board-2' class='board'>
+            <div id='2-0' class='cell'></div>
+            <div id='2-1' class='cell'></div>
+            <div id='2-2' class='cell'></div>
+            <div id='2-3' class='cell'></div>
+            <div id='2-4' class='cell'></div>
+            <div id='2-5' class='cell'></div>
+            <div id='2-6' class='cell'></div>
+            <div id='2-7' class='cell'></div>
+            <div id='2-8' class='cell'></div>
+        </div>
+        <div id='board-3' class='board'>
+            <div id='3-0' class='cell'></div>
+            <div id='3-1' class='cell'></div>
+            <div id='3-2' class='cell'></div>
+            <div id='3-3' class='cell'></div>
+            <div id='3-4' class='cell'></div>
+            <div id='3-5' class='cell'></div>
+            <div id='3-6' class='cell'></div>
+            <div id='3-7' class='cell'></div>
+            <div id='3-8' class='cell'></div>
+        </div>
+        <div id='board-4' class='board'>
+            <div id='4-0' class='cell'></div>
+            <div id='4-1' class='cell'></div>
+            <div id='4-2' class='cell'></div>
+            <div id='4-3' class='cell'></div>
+            <div id='4-4' class='cell'></div>
+            <div id='4-5' class='cell'></div>
+            <div id='4-6' class='cell'></div>
+            <div id='4-7' class='cell'></div>
+            <div id='4-8' class='cell'></div>
+        </div>
+        <div id='board-5' class='board'>
+            <div id='5-0' class='cell'></div>
+            <div id='5-1' class='cell'></div>
+            <div id='5-2' class='cell'></div>
+            <div id='5-3' class='cell'></div>
+            <div id='5-4' class='cell'></div>
+            <div id='5-5' class='cell'></div>
+            <div id='5-6' class='cell'></div>
+            <div id='5-7' class='cell'></div>
+            <div id='5-8' class='cell'></div>
+        </div>
+        <div id='board-6' class='board'>
+            <div id='6-0' class='cell'></div>
+            <div id='6-1' class='cell'></div>
+            <div id='6-2' class='cell'></div>
+            <div id='6-3' class='cell'></div>
+            <div id='6-4' class='cell'></div>
+            <div id='6-5' class='cell'></div>
+            <div id='6-6' class='cell'></div>
+            <div id='6-7' class='cell'></div>
+            <div id='6-8' class='cell'></div>
+        </div>
+        <div id='board-7' class='board'>
+            <div id='7-0' class='cell'></div>
+            <div id='7-1' class='cell'></div>
+            <div id='7-2' class='cell'></div>
+            <div id='7-3' class='cell'></div>
+            <div id='7-4' class='cell'></div>
+            <div id='7-5' class='cell'></div>
+            <div id='7-6' class='cell'></div>
+            <div id='7-7' class='cell'></div>
+            <div id='7-8' class='cell'></div>
+        </div>
+        <div id='board-8' class='board'>
+            <div id='8-0' class='cell'></div>
+            <div id='8-1' class='cell'></div>
+            <div id='8-2' class='cell'></div>
+            <div id='8-3' class='cell'></div>
+            <div id='8-4' class='cell'></div>
+            <div id='8-5' class='cell'></div>
+            <div id='8-6' class='cell'></div>
+            <div id='8-7' class='cell'></div>
+            <div id='8-8' class='cell'></div>
+        </div>
+    </div>
+
+    <div id='status'>
+        <p id='playerX' class='playerName'>Player One</p>
+        <div id='clock'>
+            <div>
+                <p>||</p>
+            </div>
+            <span id='minutes'>00</span>
+            <div>
+                <p>::</p>
+            </div>
+            <span id='seconds'>00</span>
+            <div>
+                <p>||</p>
+            </div>
+        </div>
+        <p id='playerO' class='playerName'>Player Two</p>
+    </div>
+    <script src='./nine-main.js'></script>
+</body>
+</html>

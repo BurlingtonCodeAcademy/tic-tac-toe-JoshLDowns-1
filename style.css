@@ -67,8 +67,8 @@ body {
 }
 
 #title {
-  margin: 1vh auto 1vh auto;
-  width: 100vw;
+  margin: .5vh auto 1.5vh auto;
+  width: 60vh;
   min-width: 200px;
   font-family: 'Fredericka the Great';
   font-size: 5vh;
@@ -167,7 +167,7 @@ h2 {
   display: none;
   height: 60vh;
   width: 60vh;
-  min-width: 300px;
+  min-width: 200px;
   min-height: 200px;
   grid-template-columns: 33.33% 33.33% 33.33%;
   grid-template-rows: 33.33% 33.33% 33.33%;
@@ -215,11 +215,9 @@ span {
   width: 25vh;
 }
 
-#start {
-  margin-top:40vh;
-}
 
 #start {
+  margin-top:40vh;
   height: 8vh;
   font-size: 5vh;
 }
@@ -275,7 +273,7 @@ span {
   border-radius: 5%;
   width: 75%;
   height: 75%;
-  min-width: 65px;
+  
   justify-self: center;
   align-self: center;
   background-color: #f0f0f0;

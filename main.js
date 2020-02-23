@@ -114,6 +114,7 @@ function startGame() {
 function clicked() {
     turnCount += 1;
     event.target.textContent = player.toUpperCase();
+    event.target.removeEventListener('click', clicked);
     board[event.target.id] = player;
     state = buildBoardState(board);
     let win = checkWin(state, player);
@@ -133,6 +134,7 @@ function clicked() {
             state = buildBoardState(board);
             let bestMove = makeMove(state, player)
             cells[bestMove].textContent = player.toUpperCase();
+            cells[bestMove].removeEventListener('click', clicked);
             board[bestMove.toString()] = player;
             state = buildBoardState(board);
             let aiWin = checkWin(state, player);
