@@ -172,6 +172,7 @@ function aiTurn(nextBoard) {
     let postFullBoard = false;
     player = player === 'x' ? 'o' : 'x';
     let aiMove = makeMove(fullBoard, buildBoardState(fullBoard[nextBoard]), player, fullBoard[nextBoard].finished === true?true:false);
+    console.log(aiMove)
     if (aiMove.length === 2) {
         postFullBoard = true;
         nextBoard = aiMove[0];
@@ -299,4 +300,14 @@ function checkWin(boardState, currentPlayer, boardNum) {
         }
     }
     return false;
+}
+
+function checkDraw() {
+    let finishedCount = 0;
+    for (let board in fullBoard) {
+        if ('finished' in board) {
+            finishedCount += 1
+        }
+    }
+    return finishedCount===8?true:false;
 }

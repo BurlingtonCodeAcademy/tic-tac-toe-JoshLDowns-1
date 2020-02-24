@@ -115,13 +115,15 @@ function winNow (boardState, player) {
 }
 
 //currently random move when board completely opens up... planning on working on this
-function bestOpenMove(allBoards, player) {
+function bestOpenMove(allBoards) {
     let availableBoards = [];
     let availableBoardIndexs = [];
+    let boardCount = 0
     for (let i = 0; i < 9; i++) {
         if (!allBoards[i].finished===true) {
             availableBoards.push(allBoards[i]);
-            availableBoardIndexs.push(i);
+            availableBoardIndexs.push(boardCount);
+            boardCount ++;
         }
     }
     let nextBoard = availableBoardIndexs[Math.floor(Math.random()*availableBoardIndexs.length)]
@@ -136,7 +138,7 @@ function makeMove(globalBoard, boardState, player, finished) {
     let scores = {};
     let openMoves = boardState.board;
     if (finished===true) {
-        return bestOpenMove(globalBoard, player)
+        return bestOpenMove(globalBoard)
     }
     let potentialWinMove = winNow(boardState, player);
     if (potentialWinMove !== false && openMoves.includes(potentialWinMove)) {
